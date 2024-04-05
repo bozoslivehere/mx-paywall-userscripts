@@ -9,20 +9,14 @@
 // @grant        none
 // ==/UserScript==
 
-
-
-setTimeout(function() {
+(function() {
     'use strict';
-    console.log('test message');
+
     if(localStorage) {
-        const serializedArcp = localStorage.getItem('ArcP');
-        if (serializedArcp && serializedArcp.length > 0) {
-            const arcp = JSON.parse(serializedArcp);
-            arcp.anonymous.rc['8'].c = -500;
-            localStorage.setItem('ArcP', JSON.stringify(arcp));
-        }
+        const serializedArcp = localStorage.removeItem("ArcP");
     }
 
+    console.log('test message');
     var paywallElement = document.querySelector('#ctn_premium_article, #ctn_freemium_article');
     paywallElement.remove()
     var wall = document.getElementsByClassName("a_b_wall _dn")[0]
@@ -31,4 +25,4 @@ setTimeout(function() {
     var articleBody = document.querySelector('.a_c[data-dtm-region="articulo_cuerpo"]');
     var lastParagraph = articleBody.children[articleBody.children.length - 1]
     restOfArticle.forEach(function(child) { lastParagraph.insertBefore(child, lastParagraph.nextSibling)})
-}, 5000);
+}());
